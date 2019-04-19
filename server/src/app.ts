@@ -6,8 +6,8 @@ import dotenv from 'dotenv';
 import mongo from 'connect-mongo';
 import path from 'path';
 import mongoose from 'mongoose';
-import bluebird from 'bluebird';
-import { MONGODB_URI, SESSION_SECRET } from './util/secrets';
+import bluebird, { resolve } from 'bluebird';
+import { MONGODB_URI, SESSION_SECRET, ENVIRONMENT } from './util/secrets';
 
 const MongoStore = mongo(session);
 
@@ -37,7 +37,7 @@ mongoose
     });
 
 // Express configuration
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8000);
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -53,13 +53,14 @@ app.use(
     })
 );
 
-app.use(
-    express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
-);
+app.use(express.static(path.join(__dirname, '../../web/build')));
 
 /**
  * Primary app routes.
  */
 app.use('/api', api);
+app.get('*', (_, res) => {
+    res.sendfile(path.join(__dirname, '../../web/build/index.html'));
+});
 
 export default app;

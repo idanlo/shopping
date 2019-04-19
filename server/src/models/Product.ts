@@ -1,9 +1,7 @@
 import mongoose, { Model } from 'mongoose';
+import { IProduct } from '../../../shared';
 
-export type ProductModel = mongoose.Document & {
-    name: string;
-    price: number;
-};
+export type ProductModel = mongoose.Document & IProduct;
 
 const productSchema = new mongoose.Schema(
     {

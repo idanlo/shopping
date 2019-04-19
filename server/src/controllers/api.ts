@@ -16,6 +16,7 @@ router.get('/products/all', async (req, res) => {
     // });
     // await Product.create(model);
     // await model.save();
+    console.log('/api/products/all');
     const products = await Product.find();
     res.status(200).json(products);
 });
