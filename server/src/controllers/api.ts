@@ -6,10 +6,10 @@ import logger from '../util/logger';
 const router = express.Router();
 
 /**
- * GET /api
- * List of API examples.
+ * GET /api/products/all
+ * Get all products.
  */
-router.get('/', async (req, res) => {
+router.get('/products/all', async (req, res) => {
     // const model: ProductModel = new Product({
     //     name: 'Nike shoe v4.0',
     //     price: 405
@@ -20,6 +20,10 @@ router.get('/', async (req, res) => {
     res.status(200).json(products);
 });
 
+/**
+ * GET /api/products/all
+ * Get a product with a certain ID.
+ */
 router.get('/product/:id', async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
