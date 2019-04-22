@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Navbar.module.css';
-import colors from '../colors';
+import colors from '../../styles/colors';
 
 const Navbar: React.FC = props => {
     return (
