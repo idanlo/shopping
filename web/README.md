@@ -1,3 +1,36 @@
+# Use antd in create-react-app ✨
+
+[Create React App](https://facebook.github.io/create-react-app/) + [Ant Design](https://ant.design).
+
+## Step by Step Documentation
+
+- 🇺🇸 English: https://ant.design/docs/react/use-with-create-react-app
+- 🇨🇳 中文：https://ant.design/docs/react/use-with-create-react-app-cn
+
+## Preview
+
+```bash
+$ npm install
+$ npm start
+```
+
+or:
+
+```bash
+$ yarn
+$ yarn start
+```
+
+## See more
+
+- [antd](http://github.com/ant-design/ant-design/)
+- [babel-plugin-import](http://github.com/ant-design/babel-plugin-import/)
+- [create-react-app](https://github.com/facebookincubator/create-react-app)
+- [react-app-rewired](https://github.com/timarney/react-app-rewired)
+- [less-loader](https://github.com/webpack/less-loader)
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -42,3 +75,27 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
