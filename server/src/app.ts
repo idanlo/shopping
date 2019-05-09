@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, '../../web/build')));
  */
 app.use('/api', api);
 app.get('*', (_, res) => {
-    res.sendfile(path.join(__dirname, '../../web/build/index.html'));
+    res.sendFile(path.join(__dirname, '../../web/build/index.html'));
 });
 
 export default app;
