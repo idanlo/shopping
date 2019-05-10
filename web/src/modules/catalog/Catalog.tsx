@@ -1,22 +1,9 @@
 import React from 'react';
-import { Row, Col, Layout, Card as AntCard } from 'antd';
+import { Row, Col, Layout, Skeleton } from 'antd';
 import { IProduct } from '../../../../shared';
+import Card from './Card';
 
 const { Content } = Layout;
-
-interface CardProps {
-    item: IProduct;
-}
-
-const Card: React.FC<CardProps> = ({ item }) => (
-    <AntCard
-        hoverable
-        cover={<img src={item.images[0]} />}
-        style={{ margin: 5 }}
-    >
-        <AntCard.Meta title={item.name} description={item.price} />
-    </AntCard>
-);
 
 interface CatalogProps {
     items: IProduct[];
@@ -32,7 +19,7 @@ const Catalog: React.FC<CatalogProps> = props => (
     >
         <Row>
             {props.items.map(item => (
-                <Col span={4} key={item._id}>
+                <Col xs={24} md={12} lg={4} key={item._id}>
                     <Card item={item} />
                 </Col>
             ))}
