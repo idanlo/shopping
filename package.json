@@ -1,0 +1,20 @@
+{
+    "name": "shopping",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "cd server && yarn start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/idanlo/shopping.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/idanlo/shopping/issues"
+    },
+    "homepage": "https://github.com/idanlo/shopping#readme"
+}
