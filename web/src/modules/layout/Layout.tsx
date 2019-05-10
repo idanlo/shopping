@@ -88,8 +88,6 @@ const Layout: React.FC = props => {
                 >
                     <div
                         style={{
-                            display: 'flex',
-                            flexDirection: 'row',
                             margin: '16px 0'
                         }}
                     >
