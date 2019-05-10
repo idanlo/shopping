@@ -32,10 +32,15 @@ const Layout: React.FC = props => {
             });
     }, []);
 
-    // React.useEffect(() => {
-    // Array.some()
-    // arr1.some(r => arr2.includes(r)) to find common value elements
-    // }, [selectedCategories]);
+    React.useEffect(() => {
+        if (selectedCategories.length) {
+            fetch(`/api/product/category/${selectedCategories.join(',')}`)
+                .then(res => res.json())
+                .then((data: IProduct[]) => {
+                    setItems(data);
+                });
+        }
+    }, [selectedCategories]);
 
     const toggleCategory = (categoryName: string) => {
         if (selectedCategories.includes(categoryName)) {
