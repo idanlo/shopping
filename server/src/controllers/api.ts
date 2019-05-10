@@ -34,14 +34,16 @@ router.get('/product/all', async (req, res) => {
  * Get all products with certain categories.
  * req.body.categories is expected to be an array of strings
  */
-router.get('/product/category', async (req, res) => {
+router.get('/product/category/:categories', async (req, res) => {
     try {
-        // get the categories array from the request body
-        const { categories }: { categories: string[] } = req.body;
+        // get the categories string from the request params
+        const { categories }: { categories: string } = req.params;
+        // the categories are supposed to be a string of categories separated with commas
+        const categoryArr = categories.split(',');
         // get all products with [categories] and sort by req.body.sort (with the sort middleware)
         const products = await Product.find()
             .where('categories')
-            .in(categories)
+            .in(categoryArr)
             .sort(req.body.sort);
         res.status(200).json(products);
     } catch {
