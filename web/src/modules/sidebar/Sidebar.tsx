@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -12,6 +12,12 @@ interface Props {
 }
 
 const Sidebar: React.FC<Props> = props => {
+    const [collapsed, setCollapsed] = React.useState(false);
+
+    const toggleCollapsed = () => {
+        setCollapsed(prev => !prev);
+    };
+
     const menuItemClicked = ({ keyPath }: { keyPath: string[] }) => {
         const { toggleTag, toggleCategory } = props;
         if (keyPath[1] === 'categories') {
@@ -22,21 +28,29 @@ const Sidebar: React.FC<Props> = props => {
     };
 
     return (
-        <Sider width={200} style={{ background: '#fff' }}>
+        <Sider
+            width={256}
+            style={{ background: '#fff' }}
+            collapsed={collapsed}
+            collapsible
+            theme="light"
+            onCollapse={toggleCollapsed}
+        >
             <Menu
-                mode="inline"
-                multiple
                 defaultSelectedKeys={['1']}
-                defaultOpenKeys={['categories']}
-                style={{ height: '100%', borderRight: 0 }}
+                defaultOpenKeys={[]}
+                mode="inline"
+                theme="light"
+                inlineCollapsed={collapsed}
                 onClick={menuItemClicked}
+                multiple
             >
                 <SubMenu
                     key="categories"
                     title={
                         <span>
-                            <Icon type="user" />
-                            Categories
+                            <Icon type="mail" />
+                            <span>Categories</span>
                         </span>
                     }
                 >
@@ -48,11 +62,10 @@ const Sidebar: React.FC<Props> = props => {
                     key="tags"
                     title={
                         <span>
-                            <Icon type="laptop" />
-                            Tags
+                            <Icon type="appstore" />
+                            <span>Tags</span>
                         </span>
                     }
-                    // onTitleClick={item => console.log(item)}
                 >
                     {props.tags.map(tag => (
                         <Menu.Item key={tag}>{tag}</Menu.Item>
