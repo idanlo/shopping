@@ -1,15 +1,9 @@
 import React from 'react';
 import { Layout as AntLayout, Menu, Icon, Tag } from 'antd';
-import Sidebar from '../sidebar/Sidebar';
 import Catalog from '../catalog/Catalog';
 import { IProduct } from '../../../../shared';
 
-const { SubMenu } = Menu;
-const { Header, Sider, Content } = AntLayout;
-
-type TagResponse = {
-    tags: string[];
-};
+const { Header } = AntLayout;
 
 type CategoryResponse = {
     categories: string[];
