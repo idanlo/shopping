@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import mongo from 'connect-mongo';
 import path from 'path';
 import mongoose from 'mongoose';
-import bluebird, { resolve } from 'bluebird';
+import bluebird from 'bluebird';
 import { MONGODB_URI, SESSION_SECRET, ENVIRONMENT } from './util/secrets';
 
 const MongoStore = mongo(session);
