@@ -1,10 +1,10 @@
 export default [
     'Men',
     'Women',
-    'Shoes',
-    'Shirts',
-    'Pants',
-    'Jeans',
-    'Children',
-    'Jackets'
+    'Running',
+    'Basketball',
+    'Football',
+    'Soccer',
+    'Training & Gym',
+    'Lifestyle'
 ];
