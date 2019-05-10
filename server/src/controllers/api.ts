@@ -23,9 +23,8 @@ router.use((req, res, next) => {
  */
 router.get('/product/all', async (req, res) => {
     // get all products and sort by req.body.sort (with the sort middleware)
-    const products = await Product.find()
-        .sort(req.body.sort)
-        .limit(10);
+    const products = await Product.find().sort(req.body.sort);
+    // .limit(10);
     res.status(200).json(products);
 });
 
