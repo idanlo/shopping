@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout as AntLayout, Menu, Breadcrumb, Icon, Tag } from 'antd';
+import { Layout as AntLayout, Menu, Icon, Tag } from 'antd';
 import Sidebar from '../sidebar/Sidebar';
 import Catalog from '../catalog/Catalog';
 import { IProduct } from '../../../../shared';
@@ -39,7 +39,17 @@ const Layout: React.FC = props => {
             });
 
         // fetch all products
+        fetch('/api/product/all')
+            .then(res => res.json())
+            .then((data: IProduct[]) => {
+                console.log(data);
+            });
     }, []);
+
+    // React.useEffect(() => {
+    // Array.some()
+    // arr1.some(r => arr2.includes(r)) to find common value elements
+    // }, [selectedTags, selectedCategories]);
 
     const toggleTag = (tagName: string) => {
         if (selectedTags.includes(tagName)) {
@@ -89,18 +99,21 @@ const Layout: React.FC = props => {
                     <Menu.Item key="1">Catalog</Menu.Item>
                 </Menu>
             </Header>
-            <AntLayout>
+            <AntLayout style={{ background: '#fff' }}>
                 <Sidebar
                     tags={tags}
                     categories={categories}
                     toggleTag={toggleTag}
                     toggleCategory={toggleCategory}
                 />
-                <AntLayout style={{ padding: '0 24px 24px' }}>
+                <AntLayout
+                    style={{ padding: '0 24px 24px', background: '#fff' }}
+                >
                     <div
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
+                            paddingLeft: 24,
                             margin: '16px 0'
                         }}
                     >
