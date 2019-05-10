@@ -24,7 +24,9 @@ router.use((req, res, next) => {
  */
 router.get('/product/all', async (req, res) => {
     // get all products and sort by req.body.sort (with the sort middleware)
-    const products = await Product.find().sort(req.body.sort);
+    const products = await Product.find()
+        .sort(req.body.sort)
+        .limit(10);
     res.status(200).json(products);
 });
 
@@ -95,6 +97,7 @@ router.post('/product/new', async (req, res) => {
         const {
             name,
             price,
+            images,
             tags,
             categories
         }: {
@@ -102,19 +105,22 @@ router.post('/product/new', async (req, res) => {
             price: number;
             tags: string[];
             categories: string[];
+            images: string[];
         } = req.body;
 
         const product = await Product.create({
             tags,
             categories,
             name,
+            images,
             price: +price
         });
         return res.status(200).json(product);
     } catch {
         // FIXME: better status code
         return res.status(404).json({
-            message: 'Please send fields: name, price and tags'
+            message:
+                'Please send fields: name, price, images, tags and categories'
         });
     }
 });
