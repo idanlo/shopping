@@ -17,21 +17,12 @@ type CategoryResponse = {
 
 const Layout: React.FC = props => {
     const [items, setItems] = React.useState<IProduct[]>([]);
-    const [tags, setTags] = React.useState<string[]>([]);
     const [categories, setCategories] = React.useState<string[]>([]);
-    const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = React.useState<
         string[]
     >([]);
 
     React.useEffect(() => {
-        // fetch all tags
-        fetch('/api/tag/all')
-            .then(res => res.json())
-            .then((data: TagResponse) => {
-                setTags(data.tags);
-            });
-
         // fetch all categories
         fetch('/api/category/all')
             .then(res => res.json())
@@ -50,19 +41,7 @@ const Layout: React.FC = props => {
     // React.useEffect(() => {
     // Array.some()
     // arr1.some(r => arr2.includes(r)) to find common value elements
-    // }, [selectedTags, selectedCategories]);
-
-    const toggleTag = (tagName: string) => {
-        if (selectedTags.includes(tagName)) {
-            // use Array.filter() to remove the selected tag without mutating the existing array
-            setSelectedTags(prevTags =>
-                prevTags.filter(prevTag => prevTag !== tagName)
-            );
-        } else {
-            // use Array.concat() to add the new tag without mutating the existing array
-            setSelectedTags(prevTags => prevTags.concat(tagName));
-        }
-    };
+    // }, [selectedCategories]);
 
     const toggleCategory = (categoryName: string) => {
         if (selectedCategories.includes(categoryName)) {
@@ -101,12 +80,6 @@ const Layout: React.FC = props => {
                 </Menu>
             </Header>
             <AntLayout style={{ background: '#fff' }}>
-                <Sidebar
-                    tags={tags}
-                    categories={categories}
-                    toggleTag={toggleTag}
-                    toggleCategory={toggleCategory}
-                />
                 <AntLayout
                     style={{ padding: '0 24px 24px', background: '#fff' }}
                 >
@@ -114,15 +87,17 @@ const Layout: React.FC = props => {
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
-                            paddingLeft: 24,
                             margin: '16px 0'
                         }}
                     >
-                        {selectedTags.map(tag => (
-                            <Tag key={tag}>{tag}</Tag>
-                        ))}
-                        {selectedCategories.map(category => (
-                            <Tag key={category}>{category}</Tag>
+                        {categories.map(category => (
+                            <Tag.CheckableTag
+                                checked={selectedCategories.includes(category)}
+                                onChange={() => toggleCategory(category)}
+                                key={category}
+                            >
+                                {category}
+                            </Tag.CheckableTag>
                         ))}
                     </div>
                     <Catalog items={items} />
