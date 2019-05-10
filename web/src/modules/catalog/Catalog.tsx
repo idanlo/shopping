@@ -1,8 +1,10 @@
 import React from 'react';
-import { Row, Col, Card as AntCard } from 'antd';
+import { Row, Col, Layout, Card as AntCard } from 'antd';
+
+const { Content } = Layout;
 
 const Card = () => (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div style={{ padding: '30px', background: '#fff' }}>
         <AntCard title="Card title" bordered>
             Card content
         </AntCard>
@@ -10,10 +12,9 @@ const Card = () => (
 );
 
 const Catalog: React.FC = props => (
-    <div
+    <Content
         style={{
             background: '#fff',
-            padding: 24,
             margin: 0,
             minHeight: 280
         }}
@@ -27,7 +28,7 @@ const Catalog: React.FC = props => (
                     </Col>
                 ))}
         </Row>
-    </div>
+    </Content>
 );
 
 export default Catalog;
