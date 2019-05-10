@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card as AntCard } from 'antd';
+import { Card as AntCard, Tag, Carousel } from 'antd';
 import { IProduct } from '../../../../shared';
 
 interface Props {
@@ -14,14 +14,39 @@ const Card: React.FC<Props> = ({ item }) => {
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             hoverable
-            cover={hovering ? null : <img src={item.images[0]} />}
+            cover={
+                hovering ? (
+                    <Carousel autoplay>
+                        {item.images.map(img => (
+                            <div key={img}>
+                                <div
+                                    style={{
+                                        height: 392,
+                                        width: '100%',
+                                        backgroundImage: `url("${img}")`,
+                                        backgroundSize: 'cover'
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </Carousel>
+                ) : (
+                    <img src={item.images[0]} />
+                )
+            }
             style={{ margin: 5, minHeight: 500 }}
         >
-            {hovering ? (
-                <h1>asf</h1>
-            ) : (
-                <AntCard.Meta title={item.name} description={item.price} />
-            )}
+            <AntCard.Meta
+                title={item.name}
+                description={
+                    <div>
+                        <p>{item.price}</p>
+                        {item.categories.map(category => (
+                            <Tag key={category}>{category}</Tag>
+                        ))}
+                    </div>
+                }
+            />
         </AntCard>
     );
 };
