@@ -1,17 +1,28 @@
 import React from 'react';
 import { Row, Col, Layout, Card as AntCard } from 'antd';
+import { IProduct } from '../../../../shared';
 
 const { Content } = Layout;
 
-const Card = () => (
-    <div style={{ padding: '30px', background: '#fff' }}>
-        <AntCard title="Card title" bordered>
-            Card content
-        </AntCard>
-    </div>
+interface CardProps {
+    item: IProduct;
+}
+
+const Card: React.FC<CardProps> = ({ item }) => (
+    <AntCard
+        hoverable
+        cover={<img src={item.images[0]} />}
+        style={{ margin: 5 }}
+    >
+        <AntCard.Meta title={item.name} description={item.price} />
+    </AntCard>
 );
 
-const Catalog: React.FC = props => (
+interface CatalogProps {
+    items: IProduct[];
+}
+
+const Catalog: React.FC<CatalogProps> = props => (
     <Content
         style={{
             background: '#fff',
@@ -20,13 +31,11 @@ const Catalog: React.FC = props => (
         }}
     >
         <Row>
-            {Array(50)
-                .fill(1)
-                .map((item, i) => (
-                    <Col span={6} key={i}>
-                        <Card />
-                    </Col>
-                ))}
+            {props.items.map(item => (
+                <Col span={4} key={item._id}>
+                    <Card item={item} />
+                </Col>
+            ))}
         </Row>
     </Content>
 );

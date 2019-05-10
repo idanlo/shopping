@@ -16,6 +16,7 @@ type CategoryResponse = {
 };
 
 const Layout: React.FC = props => {
+    const [items, setItems] = React.useState<IProduct[]>([]);
     const [tags, setTags] = React.useState<string[]>([]);
     const [categories, setCategories] = React.useState<string[]>([]);
     const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
@@ -42,7 +43,7 @@ const Layout: React.FC = props => {
         fetch('/api/product/all')
             .then(res => res.json())
             .then((data: IProduct[]) => {
-                console.log(data);
+                setItems(data);
             });
     }, []);
 
@@ -124,7 +125,7 @@ const Layout: React.FC = props => {
                             <Tag key={category}>{category}</Tag>
                         ))}
                     </div>
-                    <Catalog />
+                    <Catalog items={items} />
                 </AntLayout>
             </AntLayout>
         </AntLayout>
