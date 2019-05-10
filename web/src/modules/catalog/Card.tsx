@@ -40,7 +40,7 @@ const Card: React.FC<Props> = ({ item }) => {
                 title={item.name}
                 description={
                     <div>
-                        <p>{item.price}</p>
+                        <p>${item.price}</p>
                         {item.categories.map(category => (
                             <Tag key={category}>{category}</Tag>
                         ))}
