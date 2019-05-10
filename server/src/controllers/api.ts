@@ -41,10 +41,10 @@ router.get('/product/category/:categories', async (req, res) => {
         // the categories are supposed to be a string of categories separated with commas
         const categoryArr = categories.split(',');
         // get all products with [categories] and sort by req.body.sort (with the sort middleware)
-        const products = await Product.find()
-            .where('categories')
-            .in(categoryArr)
-            .sort(req.body.sort);
+        // using where().all() doesn't work because the typings are not correct.
+        const products = await Product.find({
+            categories: { $all: categoryArr }
+        }).sort(req.body.sort);
         res.status(200).json(products);
     } catch {
         // FIXME: better status code
