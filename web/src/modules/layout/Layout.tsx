@@ -24,12 +24,7 @@ const Layout: React.FC = props => {
                 setCategories(data.categories);
             });
 
-        // fetch all products
-        fetch('/api/product/all')
-            .then(res => res.json())
-            .then((data: IProduct[]) => {
-                setItems(data);
-            });
+        // fetching of products is handled in the other React.useEffect below
     }, []);
 
     React.useEffect(() => {
@@ -37,6 +32,15 @@ const Layout: React.FC = props => {
             fetch(`/api/product/category/${selectedCategories.join(',')}`)
                 .then(res => res.json())
                 .then((data: IProduct[]) => {
+                    setItems(data);
+                });
+        } else {
+            // if there are no selectedCategories then fetch all products
+            // fetch all products
+            fetch('/api/product/all')
+                .then(res => res.json())
+                .then((data: IProduct[]) => {
+                    console.log(data);
                     setItems(data);
                 });
         }
