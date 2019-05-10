@@ -1,7 +1,6 @@
 'use strict';
 import express from 'express';
 import Product, { ProductModel } from '../models/Product';
-import tags from '../models/Tag';
 import categories from '../models/Category';
 import logger from '../util/logger';
 
@@ -31,26 +30,6 @@ router.get('/product/all', async (req, res) => {
 });
 
 /**
- * GET /api/product/tag
- * Get all products with certain tags.
- * req.body.tags is expected to be an array of strings
- */
-router.get('/product/tag', async (req, res) => {
-    try {
-        const { tags }: { tags: string[] } = req.body;
-        // get all products with [tags] and sort by req.body.sort (with the sort middleware)
-        const products = await Product.find()
-            .where('tags')
-            .in(tags)
-            .sort(req.body.sort);
-        res.status(200).json(products);
-    } catch {
-        // FIXME: better status code
-        return res.status(404).json({ message: 'No products found' });
-    }
-});
-
-/**
  * GET /api/product/category
  * Get all products with certain categories.
  * req.body.categories is expected to be an array of strings
@@ -72,14 +51,6 @@ router.get('/product/category', async (req, res) => {
 });
 
 /**
- * GET /api/tag/all
- * Get all tags available.
- */
-router.get('/tag/all', (req, res) => {
-    res.status(200).json({ tags });
-});
-
-/**
  * GET /api/category/all
  * Get all categories available.
  */
@@ -98,18 +69,15 @@ router.post('/product/new', async (req, res) => {
             name,
             price,
             images,
-            tags,
             categories
         }: {
             name: string;
             price: number;
-            tags: string[];
             categories: string[];
             images: string[];
         } = req.body;
 
         const product = await Product.create({
-            tags,
             categories,
             name,
             images,
@@ -119,8 +87,7 @@ router.post('/product/new', async (req, res) => {
     } catch {
         // FIXME: better status code
         return res.status(404).json({
-            message:
-                'Please send fields: name, price, images, tags and categories'
+            message: 'Please send fields: name, price, images and categories'
         });
     }
 });
